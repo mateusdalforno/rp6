@@ -7,7 +7,7 @@
 
     <ui:define name="content">
         <h:form>
-            <h:commandButton value="Adicionar Passageiro" action="passageiros/formulario.jsf" />
+            <h:commandButton value="Adicionar Passageiro" action="/passageiros/formulario.jsf" />
             
             <h:dataTable id="passageiros" rendered="#{! empty passageiroController.passageiros}" var="passageiro" value="#{passageiroController.passageiros}" >
                 <h:column>

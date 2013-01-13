@@ -8,10 +8,11 @@
     <ui:define name="content">
         Cadastro de passageiros
         <h:form>
-            Id: <h:inputText id="id" value="#{passageiroController.passageiro.id}" disabled="true" /><br />
-            Nome: <h:inputText id="nome" value="#{passageiroController.passageiro.nome}" /><br />
-            RG: <h:inputText id="rg" value="#{passageiroController.passageiro.rg}" /><br />
-            Telefone: <h:inputText id="telefone" value="#{passageiroController.passageiro.telefone}" /><br />
+            Id: <div><h:inputText id="id" value="#{passageiroController.passageiro.id}" disabled="true" /></div>
+            <div><h:inputHidden value="#{passageiroController.passageiro.id}" /></div>
+            Nome: <div><h:inputText id="nome" value="#{passageiroController.passageiro.nome}" /></div>
+            RG: <div><h:inputText id="rg" value="#{passageiroController.passageiro.rg}" /></div>
+            Telefone: <div><h:inputText id="telefone" value="#{passageiroController.passageiro.telefone}" /></div>
             <h:commandButton value="Salvar" action="#{passageiroController.salvar()}" />
             
         </h:form>
