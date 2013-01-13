@@ -30,12 +30,12 @@ public class PassageiroDaoBean implements PassageiroDao {
 
     @Override
     public void remover(Passageiro passageiro) {
-        em.remove(passageiro);
+        em.remove(em.merge(passageiro));
     }
 
     @Override
     public Passageiro buscar(Integer id) {
-        return em.find(Passageiro.class, id);
+        return em.find/*getReference*/(Passageiro.class, id);
     }
 
     @Override
