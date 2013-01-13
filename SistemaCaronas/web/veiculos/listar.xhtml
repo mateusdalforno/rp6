@@ -10,26 +10,30 @@
             <h:commandButton value="Adicionar Veículo" action="/veiculos/formulario.jsf" />
             
             <h:dataTable id="veiculos" rendered="#{! empty veiculoController.veiculos}" var="veiculo" value="#{veiculoController.veiculos}" >
-                <h:column>
+                <!--<h:column>
                     <f:facet name="header" ><h:outputText value="Id" /></f:facet>
                     <h:outputText value="#{veiculo.id}" />
+                </h:column>-->
+                <h:column>
+                    <f:facet name="header" ><h:outputText value="Tipo do Veículo" /></f:facet>
+                    <h:outputText value="#{veiculo.tipoVeiculo.tipoVeiculo}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header" ><h:outputText value="Placa" /></f:facet>
                     <h:outputText value="#{veiculo.placa}" />
                 </h:column>
                 <h:column>
+                    <f:facet name="header" ><h:outputText value="Capacidade de Passageiros" /></f:facet>
+                    <h:outputText value="#{veiculo.capacidadePassageiro}" />
+                </h:column>
+                <!--<h:column>
                     <f:facet name="header" ><h:outputText value="Quilometragem" /></f:facet>
                     <h:outputText value="#{veiculo.quilometragem}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header" ><h:outputText value="Capacidade de Passageiros" /></f:facet>
-                    <h:outputText value="#{veiculo.capacidadePassageiro}" />
-                </h:column>
-                <h:column>
                     <f:facet name="header" ><h:outputText value="Cor" /></f:facet>
                     <h:outputText value="#{veiculo.cor}" />
-                </h:column>
+                </h:column>-->
                 <h:column>
                     <f:facet name="header" ><h:outputText value="Comandos" /></f:facet>
                     <h:commandButton value="Editar" action="#{veiculoController.editar()}">
