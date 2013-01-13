@@ -24,13 +24,14 @@ public class VeiculoController {
     private List<Veiculo> veiculos;
     @ManagedProperty(name = "id", value = "#{param.id}")
     private Integer id;
+    private TipoVeiculo tipoVeiculoSelect;
 
     public VeiculoController() {
         this.veiculo = new Veiculo();
     }
 
     public String salvar() {
-        veiculo.setTipoVeiculo(new TipoVeiculo(1));
+        veiculo.setTipoVeiculo(tipoVeiculoSelect);
         if (veiculo.getId() == null) {
             dao.inserir(veiculo);
         } else {
@@ -92,4 +93,13 @@ public class VeiculoController {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public TipoVeiculo getTipoVeiculoSelect() {
+        return tipoVeiculoSelect;
+    }
+
+    public void setTipoVeiculoSelect(TipoVeiculo tipoVeiculoSelect) {
+        this.tipoVeiculoSelect = tipoVeiculoSelect;
+    }
+    
 }
