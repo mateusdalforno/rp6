@@ -12,10 +12,9 @@ import javax.ejb.Local;
 public interface VeiculoDao {
     
     public void inserir(Veiculo veiculo);
-    public void atualizar(Veiculo veiculo);
+    public Veiculo atualizar(Veiculo veiculo);
     public void remover(Veiculo veiculo);
     public Veiculo buscar(Integer id);
-    public List<Veiculo> buscarPorModelo(String modelo);
     public List<Veiculo> listar();
     
 }

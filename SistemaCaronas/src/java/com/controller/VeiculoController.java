@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.dao.VeiculoDao;
+import com.model.entity.TipoVeiculo;
 import com.model.entity.Veiculo;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -29,12 +30,22 @@ public class VeiculoController {
     }
 
     public String salvar() {
+        veiculo.setTipoVeiculo(new TipoVeiculo(1));
         if (veiculo.getId() == null) {
             dao.inserir(veiculo);
         } else {
+            System.out.println("Atualizou!");
             dao.atualizar(veiculo);
         }
-        return "sucesso";
+        this.veiculos = dao.listar();
+        return "listar";
+    }
+    
+    public String update(Integer id) {
+        System.out.println(id);
+        System.out.println(veiculo.getCapacidadePassageiro());
+        this.veiculos = dao.listar();
+        return "listar";
     }
 
     public String editar() {
@@ -46,7 +57,7 @@ public class VeiculoController {
         this.veiculo = dao.buscar(id);
         this.dao.remover(veiculo);
         this.veiculos = dao.listar();
-        return "listaVeiculo";
+        return "listar";
     }
 
     @PostConstruct

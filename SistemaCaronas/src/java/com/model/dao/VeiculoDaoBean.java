@@ -23,13 +23,13 @@ public class VeiculoDaoBean implements VeiculoDao {
     }
 
     @Override
-    public void atualizar(Veiculo veiculo) {
-        em.merge(veiculo);
+    public Veiculo atualizar(Veiculo veiculo) {
+        return em.merge(veiculo);
     }
 
     @Override
     public void remover(Veiculo veiculo) {
-        em.remove(veiculo);
+        em.remove(em.merge(veiculo));
     }
 
     @Override
@@ -40,13 +40,6 @@ public class VeiculoDaoBean implements VeiculoDao {
     @Override
     public List<Veiculo> listar() {
         Query query = em.createNamedQuery("Veiculo.findAll");
-        return query.getResultList();
-    }
-
-    @Override
-    public List<Veiculo> buscarPorModelo(String modelo) {
-        Query query = em.createNamedQuery("Veiculo.findByModelo");
-        query.setParameter("modelo", modelo);
         return query.getResultList();
     }
 }
