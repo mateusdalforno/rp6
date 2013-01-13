@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,7 +9,9 @@
         Cadastro de passageiros
         <h:form>
             Id: <h:inputText id="id" value="#{passageiroController.passageiro.id}" disabled="true" /><br />
-            Nome: <h:inputText id="placa" value="#{passageiroController.passageiro.nome}" /><br />
+            Nome: <h:inputText id="nome" value="#{passageiroController.passageiro.nome}" /><br />
+            RG: <h:inputText id="rg" value="#{passageiroController.passageiro.rg}" /><br />
+            Telefone: <h:inputText id="telefone" value="#{passageiroController.passageiro.telefone}" /><br />
             <h:commandButton value="Salvar" action="#{passageiroController.salvar()}" />
             
         </h:form>
