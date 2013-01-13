@@ -49,7 +49,7 @@ public class Veiculo implements Serializable {
     @Column(name = "cor")
     private String cor;
     @JoinColumn(name = "tipo_veiculo", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private TipoVeiculo tipoVeiculo;
 
     public Veiculo() {
