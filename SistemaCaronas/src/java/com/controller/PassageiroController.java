@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,6 +32,11 @@ public class PassageiroController {
         this.passageiro = new Passageiro();
     }
 
+    /*@PostConstruct
+    void initialiseSession() {
+    FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+    }*/
+    
     public String salvar() {
         if (passageiro.getId() == null) {
             dao.inserir(passageiro);
