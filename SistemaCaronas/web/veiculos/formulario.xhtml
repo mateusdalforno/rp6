@@ -6,7 +6,7 @@
 
     <ui:define name="content">
         <h:form>
-            Id: <div><h:inputText id="id" value="#{veiculoController.veiculo.id}" /></div>
+            Id: <div><h:inputText id="id" value="#{veiculoController.veiculo.id}" disabled="true"/></div>
             <h:inputHidden value="#{veiculoController.veiculo.id}" />
             <!--Tipo de Veículo: <div><h:selectOneMenu id="tipo" 
                                                    value="#a{veiculoController.tipoSelecionado}" 
@@ -18,8 +18,7 @@
             Capacidade de Passageiros: <div><h:inputText id="capacidadePassageiros" value="#{veiculoController.veiculo.capacidadePassageiro}" /></div>
             Cor do Veículo: <div><h:inputText id="cor" value="#{veiculoController.veiculo.cor}" /></div>
             <div>
-                <h:commandButton value="Salvar" rendered="#{! empty veiculoController.veiculo.id}" action="#{veiculoController.update(veiculoController.veiculo.id)}" />
-                <h:commandButton value="Salvar" rendered="#{empty veiculoController.veiculo.id}" action="#{veiculoController.salvar()}" />
+                <h:commandButton value="Salvar" action="#{veiculoController.salvar()}" />
             </div>
         </h:form>
     </ui:define>

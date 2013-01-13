@@ -34,16 +34,8 @@ public class VeiculoController {
         if (veiculo.getId() == null) {
             dao.inserir(veiculo);
         } else {
-            System.out.println("Atualizou!");
             dao.atualizar(veiculo);
         }
-        this.veiculos = dao.listar();
-        return "listar";
-    }
-    
-    public String update(Integer id) {
-        System.out.println(id);
-        System.out.println(veiculo.getCapacidadePassageiro());
         this.veiculos = dao.listar();
         return "listar";
     }
