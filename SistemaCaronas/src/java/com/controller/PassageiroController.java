@@ -43,19 +43,19 @@ public class PassageiroController {
         } else {
             dao.atualizar(passageiro);
         }
-        return "sucesso_pas";
+        return "listar";
     }
 
     public String editar() {
         this.passageiro = dao.buscar(id);
-        return "formulario_pas";
+        return "formulario";
     }
 
     public String deletar() {
         this.passageiro = dao.buscar(id);
         this.dao.remover(passageiro);
         this.passageiros = dao.listar();
-        return "listaPassageiro";
+        return "listar";
     }
 
     @PostConstruct

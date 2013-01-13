@@ -9,6 +9,7 @@
         Cadastro de passageiros
         <h:form>
             Id: <h:inputText id="id" value="#{passageiroController.passageiro.id}" disabled="true" /><br />
+            <h:inputHidden value="#{passageiroController.passageiro.id}" />
             Nome: <h:inputText id="nome" value="#{passageiroController.passageiro.nome}" /><br />
             RG: <h:inputText id="rg" value="#{passageiroController.passageiro.rg}" /><br />
             Telefone: <h:inputText id="telefone" value="#{passageiroController.passageiro.telefone}" /><br />
