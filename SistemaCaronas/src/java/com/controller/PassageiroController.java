@@ -24,7 +24,7 @@ public class PassageiroController {
     @EJB
     private PassageiroDao dao;
     private List<Passageiro> passageiros;
-    @ManagedProperty(name = "id", value = "#(param.id)")
+    @ManagedProperty(name = "id", value = "#{param.id}")
     private Integer id;
     
     public PassageiroController() {
