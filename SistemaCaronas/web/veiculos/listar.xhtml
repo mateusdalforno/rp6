@@ -7,7 +7,7 @@
 
     <ui:define name="content">
         <h:form>
-            <h:commandButton value="Adicionar Veículo" action="/veiculos/formulario.jsf" />
+            <h:commandButton value="Adicionar Veículo" action="formulario" />
             
             <h:dataTable id="veiculos" rendered="#{! empty veiculoController.veiculos}" var="veiculo" value="#{veiculoController.veiculos}" >
                 <!--<h:column>
