@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../template/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        Solicitação de Reserva
+        <h:form>
+            Id: <div><h:inputText id="id" value="#{reservaController.id}" disabled="true" /></div>
+            <div><h:inputHidden value="#{reservaController.id}" /></div>
+            Número de pessoas: 
+            <div>
+                <h:inputText id="numero" value="#{reservaController.numero}" required="true">
+                    <f:ajax event="valueChange" execute="@this" render="passForm" />
+                </h:inputText>
+            </div>
+            Os passageiros são servidores da Unipampa?: <div><h:selectBooleanCheckbox id="servidores" value="#{reservaController.saoServidores}" /></div>
+            Data de Saída: 
+            <div>
+                <h:inputText id="dataSaida" value="#{reservaController.dataSaida}" size="20" required="true">
+                    <f:convertDateTime pattern="d-M-yyyy" />
+                </h:inputText>
+            </div>
+            Horário de Saída: 
+            <div>
+                <h:inputText id="horaSaida" value="#{reservaController.horaSaida}" size="20" required="true">
+                    <f:convertDateTime pattern="HH:mm" />
+                </h:inputText>
+            </div>
+            Local de Saída: <div><h:inputText id="localSaida" value="#{reservaController.localSaida}" required="true"/></div>
+            Data de Retorno: 
+            <div>
+                <h:inputText id="dataRetorno" value="#{reservaController.dataRetorno}" size="20" required="true">
+                    <f:convertDateTime pattern="d-M-yyyy" />
+                </h:inputText>
+            </div>
+            Horário de Retorno: 
+            <div>
+                <h:inputText id="horaRetorno" value="#{reservaController.horaRetorno}" size="20" required="true">
+                    <f:convertDateTime pattern="HH:mm" />
+                </h:inputText>
+            </div>
+            Local de Retorno: <div><h:inputText id="localRetorno" value="#{reservaController.localRetorno}" required="true"/></div>
+            Percurso: <div><h:inputTextarea id="percurso" value="#{reservaController.percurso}" rows="30" cols="10" /></div>
+            Objetivo da Viagem: <div><h:inputTextarea id="percurso" value="#{reservaController.objetivo}" rows="30" cols="10" /></div>
+            Passageiros:
+            <ui:repeat value="#{reservaController.passForms}" var="passageiro">
+                Nome: <div></div>
+            </ui:repeat>
+            <h:commandButton value="Salvar" action="#{reservaController.salvar()}" />
+            
+        </h:form>
+    </ui:define>
+
+</ui:composition>
