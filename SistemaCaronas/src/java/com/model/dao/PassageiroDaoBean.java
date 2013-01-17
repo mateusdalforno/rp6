@@ -36,7 +36,7 @@ public class PassageiroDaoBean implements PassageiroDao {
 
     @Override
     public Passageiro buscar(Integer id) {
-        return em.find/*getReference*/(Passageiro.class, id);
+        return em.find(Passageiro.class, id);
     }
 
     @Override

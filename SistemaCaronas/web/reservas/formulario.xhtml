@@ -62,10 +62,17 @@
                 </div>
             </ui:repeat>
             Tipo de Veículo:
-            <h:selectOneMenu id="resTipoVeiculo" value="#{reservaController.tipoVeiculo}" required="true">
+            <h:selectOneMenu id="resTipoVeiculo" value="#{reservaController.tipoVeiculo}" required="true" converter="TipoVeiculoConverter">
                 <f:selectItems value="#{tipoVeiculoController.tiposVeiculos}" var="tipoVeiculo" itemLabel="tipoVeiculo.tipoVeiculo" />
    	    </h:selectOneMenu>
-            
+            Responsável pela Solicitação:
+            <h:selectOneMenu id="responsavel" value="#{reservaController.responsavel}" required="true">
+                <f:selectItems value="#{usuarioController.usuarios}" var="usuario" itemLabel="usuario.nome" />
+   	    </h:selectOneMenu>
+            Autorizante:
+            <h:selectOneMenu id="autorizante" value="#{reservaController.autorizante}" required="true">
+                <f:selectItems value="#{usuarioController.usuarios}" var="usuario" itemLabel="usuario.nome" />
+   	    </h:selectOneMenu>
             <h:commandButton value="Salvar" action="#{reservaController.salvar()}" />
             
         </h:form>
