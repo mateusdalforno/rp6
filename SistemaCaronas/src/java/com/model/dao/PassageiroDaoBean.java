@@ -10,8 +10,9 @@ import javax.persistence.Query;
 /**
  *
  * @author wolmir
- * 
- * */
+ *
+ *
+ */
 @Stateless
 public class PassageiroDaoBean implements PassageiroDao {
 

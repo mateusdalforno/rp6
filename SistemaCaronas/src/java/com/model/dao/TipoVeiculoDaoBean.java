@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.model.dao;
 
 import com.model.entity.TipoVeiculo;
@@ -17,7 +13,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class TipoVeiculoDaoBean implements TipoVeiculoDao {
-    
+
     @PersistenceContext(unitName = "SistemaCaronasPU")
     private EntityManager em;
 
@@ -31,5 +27,4 @@ public class TipoVeiculoDaoBean implements TipoVeiculoDao {
         Query query = em.createNamedQuery("TipoVeiculo.findAll");
         return query.getResultList();
     }
-    
 }

@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Veiculo.findByCapacidadePassageiro", query = "SELECT v FROM Veiculo v WHERE v.capacidadePassageiro = :capacidadePassageiro"),
     @NamedQuery(name = "Veiculo.findByCor", query = "SELECT v FROM Veiculo v WHERE v.cor = :cor")})
 public class Veiculo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -131,5 +132,4 @@ public class Veiculo implements Serializable {
     public String toString() {
         return "com.model.entity.Veiculo[ id=" + id + " ]";
     }
-    
 }

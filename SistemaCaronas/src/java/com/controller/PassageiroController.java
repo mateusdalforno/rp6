@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.controller;
 
 import com.model.dao.PassageiroDao;
@@ -12,7 +8,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -21,22 +16,22 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @RequestScoped
 public class PassageiroController {
+
     private Passageiro passageiro;
     @EJB
     private PassageiroDao dao;
     private List<Passageiro> passageiros;
     @ManagedProperty(name = "id", value = "#{param.id}")
     private Integer id;
-    
+
     public PassageiroController() {
         this.passageiro = new Passageiro();
     }
 
     /*@PostConstruct
-    void initialiseSession() {
-    FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-    }*/
-    
+     void initialiseSession() {
+     FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+     }*/
     public String salvar() {
         if (passageiro.getId() == null) {
             dao.inserir(passageiro);

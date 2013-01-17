@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TipoVeiculo.findById", query = "SELECT t FROM TipoVeiculo t WHERE t.id = :id"),
     @NamedQuery(name = "TipoVeiculo.findByTipoVeiculo", query = "SELECT t FROM TipoVeiculo t WHERE t.tipoVeiculo = :tipoVeiculo")})
 public class TipoVeiculo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,5 +83,4 @@ public class TipoVeiculo implements Serializable {
     public String toString() {
         return "com.model.entity.TipoVeiculo[ id=" + id + " ]";
     }
-    
 }

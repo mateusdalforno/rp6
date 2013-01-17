@@ -10,8 +10,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface TipoVeiculoDao {
-    
+
     public TipoVeiculo buscar(Integer id);
+
     public List<TipoVeiculo> listar();
-    
 }

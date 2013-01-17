@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.model.entity;
 
 import java.io.Serializable;
@@ -31,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Passageiro.findByTelefone", query = "SELECT v FROM Passageiro v WHERE v.telefone = :telefone"),
     @NamedQuery(name = "Passageiro.findByRG", query = "SELECT v FROM Passageiro v WHERE v.rg = :rg")})
 public class Passageiro implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,8 +53,6 @@ public class Passageiro implements Serializable {
     public Passageiro(Integer id) {
         this.id = id;
     }
-
-    
 
     @Override
     public int hashCode() {
@@ -139,5 +134,4 @@ public class Passageiro implements Serializable {
     public void setRg(String rg) {
         this.rg = rg;
     }
-    
 }

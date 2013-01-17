@@ -10,11 +10,14 @@ import javax.ejb.Local;
  */
 @Local
 public interface VeiculoDao {
-    
+
     public void inserir(Veiculo veiculo);
+
     public Veiculo atualizar(Veiculo veiculo);
+
     public void remover(Veiculo veiculo);
+
     public Veiculo buscar(Integer id);
+
     public List<Veiculo> listar();
-    
 }
