@@ -47,14 +47,25 @@
             Percurso: <div><h:inputTextarea id="percurso" value="#{reservaController.percurso}" rows="30" cols="10" /></div>
             Objetivo da Viagem: <div><h:inputTextarea id="percurso" value="#{reservaController.objetivo}" rows="30" cols="10" /></div>
             Passageiros:
-            <ui:repeat value="#{reservaController.passageiros}" var="passageiro" varStatus="status">
-                Nome: 
-                <div>
-                    <h:inputText id="#{fnc:concat('passName', status.index)}" value="#{passageiro.nome}" required="true">
-                        <f:ajax event="valueChanged"/>
-                    </h:inputText>
+            <ui:repeat id="passForm" value="#{reservaController.passageiros}" var="passageiro" varStatus="status">
+                <div id="#{fnc:concat('pForm', status.index)}">
+                    Nome: 
+                    <div>
+                        <h:inputHidden id="#{fnc:concat('passId', status.index)}" value="#{passageiro.id}"/>
+                        <h:inputText id="#{fnc:concat('passName', status.index)}" value="#{passageiro.nome}" required="true">
+                            <f:ajax event="valueChange" execute="@this" render="#{fnc:concat('pForm', status.index)}"/>
+                        </h:inputText>
+                    </div>
+                    <h:inputText id="#{fnc:concat('passRG', status.index)}" value="#{passageiro.rg}" disabled="#{passageiro.disabled}" required="true"/>
+                    <h:inputText id="#{fnc:concat('passEnder', status.index)}" value="#{passageiro.endereco}" disabled="#{passageiro.disabled}" required="true"/>
+                    <h:inputText id="#{fnc:concat('passTelefone', status.index)}" value="#{passageiro.telefone}" disabled="#{passageiro.disabled}" required="true"/>
                 </div>
             </ui:repeat>
+            Tipo de Veículo:
+            <h:selectOneMenu id="resTipoVeiculo" value="#{reservaController.tipoVeiculo}" required="true">
+                <f:selectItems value="#{tipoVeiculoController.tiposVeiculos}" var="tipoVeiculo" itemLabel="tipoVeiculo.tipoVeiculo" />
+   	    </h:selectOneMenu>
+            
             <h:commandButton value="Salvar" action="#{reservaController.salvar()}" />
             
         </h:form>
