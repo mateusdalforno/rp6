@@ -2,6 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./../template/template.xhtml"
+                xmlns:fnc="http://localhost/fnc"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
 
@@ -46,8 +47,13 @@
             Percurso: <div><h:inputTextarea id="percurso" value="#{reservaController.percurso}" rows="30" cols="10" /></div>
             Objetivo da Viagem: <div><h:inputTextarea id="percurso" value="#{reservaController.objetivo}" rows="30" cols="10" /></div>
             Passageiros:
-            <ui:repeat value="#{reservaController.passForms}" var="passageiro">
-                Nome: <div></div>
+            <ui:repeat value="#{reservaController.passageiros}" var="passageiro" varStatus="status">
+                Nome: 
+                <div>
+                    <h:inputText id="#{fnc:concat('passName', status.index)}" value="#{passageiro.nome}" required="true">
+                        <f:ajax event="valueChanged"/>
+                    </h:inputText>
+                </div>
             </ui:repeat>
             <h:commandButton value="Salvar" action="#{reservaController.salvar()}" />
             
