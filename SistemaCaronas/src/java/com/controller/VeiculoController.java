@@ -43,6 +43,7 @@ public class VeiculoController {
 
     public String editar() {
         this.veiculo = dao.buscar(id);
+        this.tipoVeiculoSelect = this.veiculo.getTipoVeiculo();
         return "formulario";
     }
 
