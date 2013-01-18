@@ -16,6 +16,7 @@ public class VeiculoDaoBean implements VeiculoDao {
 
     @PersistenceContext(unitName = "SistemaCaronasPU")
     private EntityManager em;
+    
 
     @Override
     public void inserir(Veiculo veiculo) {

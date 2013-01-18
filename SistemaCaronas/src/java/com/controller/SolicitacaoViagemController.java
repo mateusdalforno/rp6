@@ -4,14 +4,19 @@
  */
 package com.controller;
 
+import com.model.dao.PassageiroDaoBean;
 import com.model.dao.SolicitacaoviagemDao;
 import com.model.entity.Solicitacaoviagem;
+import com.model.entity.Veiculo;
+import com.pogs.PassageiroPOG;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -29,12 +34,31 @@ public class SolicitacaoViagemController {
     @ManagedProperty(name = "id", value = "#{param.id}")
     private Integer id;
     
+    private PassageiroPOG[] passageiros;
+    //private List<SelectItem> veiculos;
+    
     public SolicitacaoViagemController() {
         this.solicitacaoviagem = new Solicitacaoviagem();
     }
     
+    @PostConstruct
+    public void init() {
+        this.passageiros = new PassageiroPOG[] {new PassageiroPOG()};
+        /*VeiculoController vc = new VeiculoController();
+        vc.listar();
+        List<Veiculo> todosveiculos = vc.getVeiculos();
+        for (Veiculo veiculo: todosveiculos) {
+            this.getVeiculos().add(new SelectItem(veiculo, veiculo.getTipoVeiculo().getTipoVeiculo()));
+        }*/
+    }
+    
     public String salvar() {
         if (getSolicitacaoviagem().getId() == null) {
+            for (PassageiroPOG pog: getPassageiros()) {
+                if (pog.getId() == null) {
+                    new PassageiroDaoBean().inserir(pog.getPassageiro());
+                }
+            }
             getDao().inserir(getSolicitacaoviagem());
         } else {
             getDao().atualizar(getSolicitacaoviagem());
@@ -126,6 +150,46 @@ public class SolicitacaoViagemController {
     }
     
     public boolean getSaoServidores() {
+        if (this.solicitacaoviagem.getServidores() == null) {
+            return false;
+        }
         return this.solicitacaoviagem.getServidores().equals("Sim");
     }
+    
+    public void setNumero(Integer numero) {
+        this.passageiros = new PassageiroPOG[numero];
+        for (int i = 0; i < numero; i++) {
+            this.passageiros[i] = new PassageiroPOG();
+        }
+        this.solicitacaoviagem.setNumeroTransportados(numero);
+    }
+    
+    public Integer getNumero() {
+        return this.solicitacaoviagem.getNumeroTransportados();
+    }
+
+    /**
+     * @return the passageiros
+     */
+    public PassageiroPOG[] getPassageiros() {
+        return passageiros;
+    }
+
+    /**
+     * @param passageiros the passageiros to set
+     */
+    public void setPassageiros(PassageiroPOG[] passageiros) {
+        this.passageiros = passageiros;
+    }
+
+    /**
+     * @return the veiculos
+     */
+    //public List<SelectItem> getVeiculos() {
+      //  return veiculos;
+    //}
+
+    
+    
+    
 }

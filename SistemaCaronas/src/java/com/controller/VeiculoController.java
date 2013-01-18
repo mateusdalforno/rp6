@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.dao.VeiculoDao;
+import com.model.dao.VeiculoDaoBean;
 import com.model.entity.TipoVeiculo;
 import com.model.entity.Veiculo;
 import java.util.List;
@@ -28,6 +29,7 @@ public class VeiculoController {
 
     public VeiculoController() {
         this.veiculo = new Veiculo();
+        this.dao = new VeiculoDaoBean();
     }
 
     public String salvar() {
