@@ -6,6 +6,7 @@ package com.controller;
 
 import com.model.dao.PassageiroDaoBean;
 import com.model.dao.SolicitacaoviagemDao;
+import com.model.entity.Passageiro;
 import com.model.entity.Solicitacaoviagem;
 import com.model.entity.Veiculo;
 import com.pogs.PassageiroPOG;
@@ -16,6 +17,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 /**
@@ -41,15 +43,20 @@ public class SolicitacaoViagemController {
         this.solicitacaoviagem = new Solicitacaoviagem();
     }
     
-    @PostConstruct
-    public void init() {
-        this.passageiros = new PassageiroPOG[] {new PassageiroPOG()};
+    //@PostConstruct
+    //public void init() {
+      //  this.passageiros = new PassageiroPOG[] {new PassageiroPOG()};
         /*VeiculoController vc = new VeiculoController();
         vc.listar();
         List<Veiculo> todosveiculos = vc.getVeiculos();
         for (Veiculo veiculo: todosveiculos) {
             this.getVeiculos().add(new SelectItem(veiculo, veiculo.getTipoVeiculo().getTipoVeiculo()));
         }*/
+    //}
+    
+    @PostConstruct
+    void initialiseSession() {
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
     }
     
     public String salvar() {
@@ -173,13 +180,6 @@ public class SolicitacaoViagemController {
      */
     public PassageiroPOG[] getPassageiros() {
         return passageiros;
-    }
-
-    /**
-     * @param passageiros the passageiros to set
-     */
-    public void setPassageiros(PassageiroPOG[] passageiros) {
-        this.passageiros = passageiros;
     }
 
     /**

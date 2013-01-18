@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./../template/template.xhtml"
                 xmlns:fnc="http://localhost/fnc"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -14,7 +15,7 @@
             Número de pessoas: 
             <div>
                 <h:inputText id="numero" value="#{solicitacaoViagemController.numero}" required="true">
-                    <f:ajax event="valueChange" execute="@this" render="@form" />
+                    <f:ajax event="valueChange" execute="@this" render="PassData" />
                 </h:inputText>
             </div>
             Os passageiros são servidores da Unipampa?: <div><h:selectBooleanCheckbox id="servidores" value="#{solicitacaoViagemController.saoServidores}" /></div>
@@ -47,21 +48,34 @@
             Percurso: <div><h:inputTextarea id="percurso" value="#{solicitacaoViagemController.solicitacaoviagem.percurso}" rows="15" cols="30" /></div>
             Objetivo da Viagem: <div><h:inputTextarea id="objetivo" value="#{solicitacaoViagemController.solicitacaoviagem.objetivoViagem}" rows="15" cols="30" /></div>
             Passageiros:
-            <!--<div id="passForm">
-                <ui:repeat value="#{solicitacaoViagemController.passageiros}" var="passageiro" varStatus="status">
-                    <div id="#{fnc:concat('pForm', status.index)}">
-                        Nome: 
-                        <div>
-                            <h:inputHidden id="#{fnc:concat('passId', status.index)}" value="#{passageiro.id}"/>
-                            <h:inputText id="#{fnc:concat('passName', status.index)}" value="#{passageiro.nome}" required="true">
-                                <f:ajax event="blur" execute="@this" render="#{fnc:concat('pForm', status.index)}"/>
-                            </h:inputText>
-                        </div>
-                        <h:inputText id="#{fnc:concat('passRG', status.index)}" value="#{passageiro.rg}" disabled="#{passageiro.disabled}" required="true"/>
-                        <h:inputText id="#{fnc:concat('passTelefone', status.index)}" value="#{passageiro.telefone}" disabled="#{passageiro.disabled}" required="true"/>
-                    </div>
-                </ui:repeat>
-            </div>-->
+            <h:panelGroup id="passgroup">
+                <h:dataTable id="PassData" value="#{solicitacaoViagemController.passageiros}" var="passageiro">
+                    <h:column>
+                        <!--<h:panelGroup id="">-->
+                            <!--Id:
+                            <div>
+                                <h:inputText id="" value="" disabled="true"/>
+                            </div>-->
+                            <h:inputHidden id="passId" value="#{passageiro.id}"/>
+                            Nome: 
+                            <div>
+                                <h:inputText id="passName" value="#{passageiro.nome}" required="true">
+                                    <f:ajax event="valueChange" execute="@this" render="@this passRG passTel"/>
+                                </h:inputText>
+                            </div>
+                            RG:
+                            <div>
+                                <h:inputText id="passRG" value="#{passageiro.rg}" disabled="false" required="true"/>
+                            </div>
+                            Telefone:
+                            <div>
+                                <h:inputText id="passTel" value="#{passageiro.telefone}" disabled="false" required="true"/>
+                            </div>
+                        <!--</h:panelGroup>-->
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            
             Tipo de Veículo: <div><h:selectOneMenu required="true" id="tipo" value="#{solicitacaoViagemController.solicitacaoviagem.veiculo}" converter="TipoVeiculoConverter" >
                     <f:selectItems value="#{tipoVeiculoController.tiposVeiculos}" var="tipoVeiculo" itemLabel="#{tipoVeiculo.tipoVeiculo}" />
                 </h:selectOneMenu></div>

@@ -14,11 +14,13 @@ import java.util.List;
  */
 public class PassageiroPOG {
     private Passageiro passageiro;
-    private boolean disabled;
+    private String disabled;
+    private int compId;
     
     public PassageiroPOG() {
         this.passageiro = new Passageiro();
-        this.disabled = true;
+        this.disabled = "true";
+        this.compId = 0;
     }
     
     public void setNome(String nome) {
@@ -30,7 +32,7 @@ public class PassageiroPOG {
                 return;
             }
         }
-        this.setDisabled(false);
+        this.disabled = "false";
     }
 
     public Integer getId() {
@@ -42,6 +44,13 @@ public class PassageiroPOG {
     }
 
     public String getNome() {
+        /*List<Passageiro> possiveis = new PassageiroDaoBean().buscarPorNome(getPassageiro().getNome());
+        if (possiveis != null) {
+            if (possiveis.size() > 0) {
+                this.setPassageiro(possiveis.get(0));
+                return getPassageiro().getNome();
+            }
+        }*/
         return getPassageiro().getNome();
     }
 
@@ -64,16 +73,11 @@ public class PassageiroPOG {
     /**
      * @return the disabled
      */
-    public boolean isDisabled() {
+    public String getDisabled() {
         return disabled;
     }
 
-    /**
-     * @param disabled the disabled to set
-     */
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
+
 
     /**
      * @return the passageiro
@@ -87,6 +91,20 @@ public class PassageiroPOG {
      */
     public void setPassageiro(Passageiro passageiro) {
         this.passageiro = passageiro;
+    }
+
+    /**
+     * @return the compId
+     */
+    public int getCompId() {
+        return compId;
+    }
+
+    /**
+     * @param compId the compId to set
+     */
+    public void setCompId(int compId) {
+        this.compId = compId;
     }
     
     
