@@ -35,8 +35,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Veiculo.findByCapacidadePassageiro", query = "SELECT v FROM Veiculo v WHERE v.capacidadePassageiro = :capacidadePassageiro"),
     @NamedQuery(name = "Veiculo.findByCor", query = "SELECT v FROM Veiculo v WHERE v.cor = :cor")})
 public class Veiculo implements Serializable {
+<<<<<<< HEAD
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "veiculo")
     private List<SolicitacaoViagem> solicitacaoViagemList;
+=======
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo")
+    private List<Solicitacaoviagem> solicitacaoviagemList;
+>>>>>>> b631951e9508beae9bced05ede8614a82490687b
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -140,11 +145,11 @@ public class Veiculo implements Serializable {
     }
 
     @XmlTransient
-    public List<SolicitacaoViagem> getSolicitacaoViagemList() {
-        return solicitacaoViagemList;
+    public List<Solicitacaoviagem> getSolicitacaoviagemList() {
+        return solicitacaoviagemList;
     }
 
-    public void setSolicitacaoViagemList(List<SolicitacaoViagem> solicitacaoViagemList) {
-        this.solicitacaoViagemList = solicitacaoViagemList;
+    public void setSolicitacaoviagemList(List<Solicitacaoviagem> solicitacaoviagemList) {
+        this.solicitacaoviagemList = solicitacaoviagemList;
     }
 }

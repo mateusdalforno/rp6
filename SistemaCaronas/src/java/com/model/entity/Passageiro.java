@@ -32,11 +32,19 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Passageiro.findByTelefone", query = "SELECT v FROM Passageiro v WHERE v.telefone = :telefone"),
     @NamedQuery(name = "Passageiro.findByRG", query = "SELECT v FROM Passageiro v WHERE v.rg = :rg")})
 public class Passageiro implements Serializable {
+<<<<<<< HEAD
     @JoinTable(name = "passageiro_solicitacao_viagem", joinColumns = {
         @JoinColumn(name = "Passageiro_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "solicitacaoViagem_id", referencedColumnName = "id")})
     @ManyToMany
     private List<SolicitacaoViagem> solicitacaoViagemList;
+=======
+    @JoinTable(name = "passageiro_has_solicitacaoviagem", joinColumns = {
+        @JoinColumn(name = "Passageiro_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "solicitacaoViagem_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Solicitacaoviagem> solicitacaoviagemList;
+>>>>>>> b631951e9508beae9bced05ede8614a82490687b
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -146,11 +154,11 @@ public class Passageiro implements Serializable {
     }
 
     @XmlTransient
-    public List<SolicitacaoViagem> getSolicitacaoViagemList() {
-        return solicitacaoViagemList;
+    public List<Solicitacaoviagem> getSolicitacaoviagemList() {
+        return solicitacaoviagemList;
     }
 
-    public void setSolicitacaoViagemList(List<SolicitacaoViagem> solicitacaoViagemList) {
-        this.solicitacaoViagemList = solicitacaoViagemList;
+    public void setSolicitacaoviagemList(List<Solicitacaoviagem> solicitacaoviagemList) {
+        this.solicitacaoviagemList = solicitacaoviagemList;
     }
 }

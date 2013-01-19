@@ -42,10 +42,17 @@ public class Usuario implements Serializable {
     @Size(max = 45)
     @Column(name = "email")
     private String email;
+<<<<<<< HEAD
     @OneToMany(mappedBy = "responsavelAutorizante")
     private List<SolicitacaoViagem> solicitacaoViagemList;
     @OneToMany(mappedBy = "responsavelSolicitacao")
     private List<SolicitacaoViagem> solicitacaoViagemList1;
+=======
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavelAutorizante")
+    private List<Solicitacaoviagem> solicitacaoviagemList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavelSolicitacao")
+    private List<Solicitacaoviagem> solicitacaoviagemList1;
+>>>>>>> b631951e9508beae9bced05ede8614a82490687b
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -178,20 +185,20 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<SolicitacaoViagem> getSolicitacaoViagemList() {
-        return solicitacaoViagemList;
+    public List<Solicitacaoviagem> getSolicitacaoviagemList() {
+        return solicitacaoviagemList;
     }
 
-    public void setSolicitacaoViagemList(List<SolicitacaoViagem> solicitacaoViagemList) {
-        this.solicitacaoViagemList = solicitacaoViagemList;
+    public void setSolicitacaoviagemList(List<Solicitacaoviagem> solicitacaoviagemList) {
+        this.solicitacaoviagemList = solicitacaoviagemList;
     }
 
     @XmlTransient
-    public List<SolicitacaoViagem> getSolicitacaoViagemList1() {
-        return solicitacaoViagemList1;
+    public List<Solicitacaoviagem> getSolicitacaoviagemList1() {
+        return solicitacaoviagemList1;
     }
 
-    public void setSolicitacaoViagemList1(List<SolicitacaoViagem> solicitacaoViagemList1) {
-        this.solicitacaoViagemList1 = solicitacaoViagemList1;
+    public void setSolicitacaoviagemList1(List<Solicitacaoviagem> solicitacaoviagemList1) {
+        this.solicitacaoviagemList1 = solicitacaoviagemList1;
     }
 }
