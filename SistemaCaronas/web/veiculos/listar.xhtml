@@ -8,12 +8,7 @@
     <ui:define name="content">
         <h:form>
             <h:commandButton value="Adicionar Veículo" action="formulario" />
-            
             <h:dataTable id="veiculos" rendered="#{! empty veiculoController.veiculos}" var="veiculo" value="#{veiculoController.veiculos}" >
-                <!--<h:column>
-                    <f:facet name="header" ><h:outputText value="Id" /></f:facet>
-                    <h:outputText value="#{veiculo.id}" />
-                </h:column>-->
                 <h:column>
                     <f:facet name="header" ><h:outputText value="Tipo do Veículo" /></f:facet>
                     <h:outputText value="#{veiculo.tipoVeiculo.tipoVeiculo}" />
@@ -26,14 +21,6 @@
                     <f:facet name="header" ><h:outputText value="Capacidade de Passageiros" /></f:facet>
                     <h:outputText value="#{veiculo.capacidadePassageiro}" />
                 </h:column>
-                <!--<h:column>
-                    <f:facet name="header" ><h:outputText value="Quilometragem" /></f:facet>
-                    <h:outputText value="#{veiculo.quilometragem}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header" ><h:outputText value="Cor" /></f:facet>
-                    <h:outputText value="#{veiculo.cor}" />
-                </h:column>-->
                 <h:column>
                     <f:facet name="header" ><h:outputText value="Comandos" /></f:facet>
                     <h:commandButton value="Editar" action="#{veiculoController.editar()}">

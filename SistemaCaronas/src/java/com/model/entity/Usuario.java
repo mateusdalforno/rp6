@@ -1,7 +1,9 @@
 package com.model.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +14,11 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +35,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByNumeroServidor", query = "SELECT u FROM Usuario u WHERE u.numeroServidor = :numeroServidor"),
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
 public class Usuario implements Serializable {
+    @Size(max = 45)
+    @Column(name = "telefone")
+    private String telefone;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 45)
+    @Column(name = "email")
+    private String email;
+    @OneToMany(mappedBy = "responsavelAutorizante")
+    private List<SolicitacaoViagem> solicitacaoViagemList;
+    @OneToMany(mappedBy = "responsavelSolicitacao")
+    private List<SolicitacaoViagem> solicitacaoViagemList1;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -144,5 +159,39 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "com.model.entity.Usuario[ id=" + id + " ]";
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @XmlTransient
+    public List<SolicitacaoViagem> getSolicitacaoViagemList() {
+        return solicitacaoViagemList;
+    }
+
+    public void setSolicitacaoViagemList(List<SolicitacaoViagem> solicitacaoViagemList) {
+        this.solicitacaoViagemList = solicitacaoViagemList;
+    }
+
+    @XmlTransient
+    public List<SolicitacaoViagem> getSolicitacaoViagemList1() {
+        return solicitacaoViagemList1;
+    }
+
+    public void setSolicitacaoViagemList1(List<SolicitacaoViagem> solicitacaoViagemList1) {
+        this.solicitacaoViagemList1 = solicitacaoViagemList1;
     }
 }
