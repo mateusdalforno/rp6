@@ -6,11 +6,9 @@ package com.controller;
 
 import com.model.dao.PassageiroDaoBean;
 import com.model.dao.SolicitacaoviagemDao;
-import com.model.entity.Passageiro;
 import com.model.entity.Solicitacaoviagem;
-import com.model.entity.Veiculo;
 import com.pogs.PassageiroPOG;
-import java.util.ArrayList;
+import com.pogs.SolicitPog;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -18,7 +16,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 
 /**
  *
@@ -59,13 +56,14 @@ public class SolicitacaoViagemController {
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
     }
     
-    public String salvar() {
+    public String salvar(SolicitPog spog) {
         if (getSolicitacaoviagem().getId() == null) {
-            for (PassageiroPOG pog: getPassageiros()) {
+            for (PassageiroPOG pog: spog.getPassageiros()) {
                 if (pog.getId() == null) {
                     new PassageiroDaoBean().inserir(pog.getPassageiro());
                 }
             }
+            this.setNumero(spog.getNumero());
             getDao().inserir(getSolicitacaoviagem());
         } else {
             getDao().atualizar(getSolicitacaoviagem());
@@ -164,10 +162,6 @@ public class SolicitacaoViagemController {
     }
     
     public void setNumero(Integer numero) {
-        this.passageiros = new PassageiroPOG[numero];
-        for (int i = 0; i < numero; i++) {
-            this.passageiros[i] = new PassageiroPOG();
-        }
         this.solicitacaoviagem.setNumeroTransportados(numero);
     }
     
@@ -181,6 +175,7 @@ public class SolicitacaoViagemController {
     public PassageiroPOG[] getPassageiros() {
         return passageiros;
     }
+    
 
     /**
      * @return the veiculos

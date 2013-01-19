@@ -4,7 +4,6 @@
  */
 package com.pogs;
 
-import com.model.dao.PassageiroDaoBean;
 import com.model.entity.Passageiro;
 import java.util.List;
 
@@ -15,20 +14,23 @@ import java.util.List;
 public class PassageiroPOG {
     private Passageiro passageiro;
     private String disabled;
+    private SolicitPog megaPog;
     private int compId;
     
-    public PassageiroPOG() {
+    public PassageiroPOG(SolicitPog megaPog) {
         this.passageiro = new Passageiro();
+        this.megaPog = megaPog;
         this.disabled = "true";
         this.compId = 0;
     }
     
     public void setNome(String nome) {
         this.getPassageiro().setNome(nome);
-        List<Passageiro> possiveis = new PassageiroDaoBean().buscarPorNome(nome);
+        List<Passageiro> possiveis = this.megaPog.buscaPorNome(nome);
         if (possiveis != null) {
             if (possiveis.size() > 0) {
-                this.setPassageiro(possiveis.get(0));
+                this.passageiro = possiveis.get(0);
+                this.disabled = "true";
                 return;
             }
         }
@@ -51,6 +53,7 @@ public class PassageiroPOG {
                 return getPassageiro().getNome();
             }
         }*/
+        //this.passageiro.setNome(this.passageiro.getNome() + "a");
         return getPassageiro().getNome();
     }
 
