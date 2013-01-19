@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.model.entity;
 
 import java.io.Serializable;
@@ -26,35 +30,34 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoVeiculo.findAll", query = "SELECT t FROM TipoVeiculo t"),
-    @NamedQuery(name = "TipoVeiculo.findById", query = "SELECT t FROM TipoVeiculo t WHERE t.id = :id"),
+    @NamedQuery(name = "TipoVeiculo.findByIdTipoVeiculo", query = "SELECT t FROM TipoVeiculo t WHERE t.idTipoVeiculo = :idTipoVeiculo"),
     @NamedQuery(name = "TipoVeiculo.findByTipoVeiculo", query = "SELECT t FROM TipoVeiculo t WHERE t.tipoVeiculo = :tipoVeiculo")})
 public class TipoVeiculo implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoVeiculo")
-    private List<Veiculo> veiculoList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id_tipo_veiculo")
+    private Integer idTipoVeiculo;
     @Size(max = 255)
     @Column(name = "tipo_veiculo")
     private String tipoVeiculo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoVeiculo")
+    private List<Veiculo> veiculoList;
 
     public TipoVeiculo() {
     }
 
-    public TipoVeiculo(Integer id) {
-        this.id = id;
+    public TipoVeiculo(Integer idTipoVeiculo) {
+        this.idTipoVeiculo = idTipoVeiculo;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTipoVeiculo() {
+        return idTipoVeiculo;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoVeiculo(Integer idTipoVeiculo) {
+        this.idTipoVeiculo = idTipoVeiculo;
     }
 
     public String getTipoVeiculo() {
@@ -65,10 +68,19 @@ public class TipoVeiculo implements Serializable {
         this.tipoVeiculo = tipoVeiculo;
     }
 
+    @XmlTransient
+    public List<Veiculo> getVeiculoList() {
+        return veiculoList;
+    }
+
+    public void setVeiculoList(List<Veiculo> veiculoList) {
+        this.veiculoList = veiculoList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idTipoVeiculo != null ? idTipoVeiculo.hashCode() : 0);
         return hash;
     }
 
@@ -79,7 +91,7 @@ public class TipoVeiculo implements Serializable {
             return false;
         }
         TipoVeiculo other = (TipoVeiculo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idTipoVeiculo == null && other.idTipoVeiculo != null) || (this.idTipoVeiculo != null && !this.idTipoVeiculo.equals(other.idTipoVeiculo))) {
             return false;
         }
         return true;
@@ -87,15 +99,7 @@ public class TipoVeiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.model.entity.TipoVeiculo[ id=" + id + " ]";
+        return "com.model.entity.TipoVeiculo[ idTipoVeiculo=" + idTipoVeiculo + " ]";
     }
-
-    @XmlTransient
-    public List<Veiculo> getVeiculoList() {
-        return veiculoList;
-    }
-
-    public void setVeiculoList(List<Veiculo> veiculoList) {
-        this.veiculoList = veiculoList;
-    }
+    
 }

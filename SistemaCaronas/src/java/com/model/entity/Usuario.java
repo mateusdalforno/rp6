@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.model.entity;
 
 import java.io.Serializable;
@@ -29,37 +33,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
     @NamedQuery(name = "Usuario.findByRg", query = "SELECT u FROM Usuario u WHERE u.rg = :rg"),
     @NamedQuery(name = "Usuario.findByNomeUsuario", query = "SELECT u FROM Usuario u WHERE u.nomeUsuario = :nomeUsuario"),
     @NamedQuery(name = "Usuario.findByNumeroServidor", query = "SELECT u FROM Usuario u WHERE u.numeroServidor = :numeroServidor"),
-    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
+    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
+    @NamedQuery(name = "Usuario.findByTelefone", query = "SELECT u FROM Usuario u WHERE u.telefone = :telefone"),
+    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")})
 public class Usuario implements Serializable {
-    @Size(max = 45)
-    @Column(name = "telefone")
-    private String telefone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 45)
-    @Column(name = "email")
-    private String email;
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "responsavelAutorizante")
-    private List<SolicitacaoViagem> solicitacaoViagemList;
-    @OneToMany(mappedBy = "responsavelSolicitacao")
-    private List<SolicitacaoViagem> solicitacaoViagemList1;
-=======
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavelAutorizante")
-    private List<Solicitacaoviagem> solicitacaoviagemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavelSolicitacao")
-    private List<Solicitacaoviagem> solicitacaoviagemList1;
->>>>>>> b631951e9508beae9bced05ede8614a82490687b
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
     @Lob
     @Size(max = 65535)
     @Column(name = "nome")
@@ -76,23 +63,34 @@ public class Usuario implements Serializable {
     @Size(max = 255)
     @Column(name = "senha")
     private String senha;
-    @JoinColumn(name = "tipo_usuario_id", referencedColumnName = "id")
+    @Size(max = 45)
+    @Column(name = "telefone")
+    private String telefone;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 45)
+    @Column(name = "email")
+    private String email;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idResponsavelAutorizante")
+    private List<SolicitacaoViagem> solicitacaoViagemList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idResponsavelSolicitacao")
+    private List<SolicitacaoViagem> solicitacaoViagemList1;
+    @JoinColumn(name = "id_tipo_usuario", referencedColumnName = "id_tipo_usuario")
     @ManyToOne(optional = false)
-    private TipoUsuario tipoUsuarioId;
+    private TipoUsuario idTipoUsuario;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id) {
-        this.id = id;
+    public Usuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -135,39 +133,6 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public TipoUsuario getTipoUsuarioId() {
-        return tipoUsuarioId;
-    }
-
-    public void setTipoUsuarioId(TipoUsuario tipoUsuarioId) {
-        this.tipoUsuarioId = tipoUsuarioId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.model.entity.Usuario[ id=" + id + " ]";
-    }
-
     public String getTelefone() {
         return telefone;
     }
@@ -185,20 +150,54 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Solicitacaoviagem> getSolicitacaoviagemList() {
-        return solicitacaoviagemList;
+    public List<SolicitacaoViagem> getSolicitacaoViagemList() {
+        return solicitacaoViagemList;
     }
 
-    public void setSolicitacaoviagemList(List<Solicitacaoviagem> solicitacaoviagemList) {
-        this.solicitacaoviagemList = solicitacaoviagemList;
+    public void setSolicitacaoViagemList(List<SolicitacaoViagem> solicitacaoViagemList) {
+        this.solicitacaoViagemList = solicitacaoViagemList;
     }
 
     @XmlTransient
-    public List<Solicitacaoviagem> getSolicitacaoviagemList1() {
-        return solicitacaoviagemList1;
+    public List<SolicitacaoViagem> getSolicitacaoViagemList1() {
+        return solicitacaoViagemList1;
     }
 
-    public void setSolicitacaoviagemList1(List<Solicitacaoviagem> solicitacaoviagemList1) {
-        this.solicitacaoviagemList1 = solicitacaoviagemList1;
+    public void setSolicitacaoViagemList1(List<SolicitacaoViagem> solicitacaoViagemList1) {
+        this.solicitacaoViagemList1 = solicitacaoViagemList1;
     }
+
+    public TipoUsuario getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(TipoUsuario idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Usuario)) {
+            return false;
+        }
+        Usuario other = (Usuario) object;
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.model.entity.Usuario[ idUsuario=" + idUsuario + " ]";
+    }
+    
 }

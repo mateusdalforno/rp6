@@ -28,51 +28,51 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author thiago
  */
 @Entity
-@Table(name = "solicitacaoviagem")
+@Table(name = "solicitacao_viagem")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Solicitacaoviagem.findAll", query = "SELECT s FROM Solicitacaoviagem s"),
-    @NamedQuery(name = "Solicitacaoviagem.findById", query = "SELECT s FROM Solicitacaoviagem s WHERE s.id = :id"),
-    @NamedQuery(name = "Solicitacaoviagem.findByNumeroTransportados", query = "SELECT s FROM Solicitacaoviagem s WHERE s.numeroTransportados = :numeroTransportados"),
-    @NamedQuery(name = "Solicitacaoviagem.findByServidores", query = "SELECT s FROM Solicitacaoviagem s WHERE s.servidores = :servidores"),
-    @NamedQuery(name = "Solicitacaoviagem.findByDataSaida", query = "SELECT s FROM Solicitacaoviagem s WHERE s.dataSaida = :dataSaida"),
-    @NamedQuery(name = "Solicitacaoviagem.findByHoraSaida", query = "SELECT s FROM Solicitacaoviagem s WHERE s.horaSaida = :horaSaida"),
-    @NamedQuery(name = "Solicitacaoviagem.findByDataRetorno", query = "SELECT s FROM Solicitacaoviagem s WHERE s.dataRetorno = :dataRetorno"),
-    @NamedQuery(name = "Solicitacaoviagem.findByHoraRetorno", query = "SELECT s FROM Solicitacaoviagem s WHERE s.horaRetorno = :horaRetorno")})
-public class Solicitacaoviagem implements Serializable {
+    @NamedQuery(name = "SolicitacaoViagem.findAll", query = "SELECT s FROM SolicitacaoViagem s"),
+    @NamedQuery(name = "SolicitacaoViagem.findByIdSolicitacaoViagem", query = "SELECT s FROM SolicitacaoViagem s WHERE s.idSolicitacaoViagem = :idSolicitacaoViagem"),
+    @NamedQuery(name = "SolicitacaoViagem.findByNumeroTransportados", query = "SELECT s FROM SolicitacaoViagem s WHERE s.numeroTransportados = :numeroTransportados"),
+    @NamedQuery(name = "SolicitacaoViagem.findByServidores", query = "SELECT s FROM SolicitacaoViagem s WHERE s.servidores = :servidores"),
+    @NamedQuery(name = "SolicitacaoViagem.findByDataSaida", query = "SELECT s FROM SolicitacaoViagem s WHERE s.dataSaida = :dataSaida"),
+    @NamedQuery(name = "SolicitacaoViagem.findByHoraSaida", query = "SELECT s FROM SolicitacaoViagem s WHERE s.horaSaida = :horaSaida"),
+    @NamedQuery(name = "SolicitacaoViagem.findByDataRetorno", query = "SELECT s FROM SolicitacaoViagem s WHERE s.dataRetorno = :dataRetorno"),
+    @NamedQuery(name = "SolicitacaoViagem.findByHoraRetorno", query = "SELECT s FROM SolicitacaoViagem s WHERE s.horaRetorno = :horaRetorno")})
+public class SolicitacaoViagem implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "numeroTransportados")
+    @Column(name = "id_solicitacao_viagem")
+    private Integer idSolicitacaoViagem;
+    @Column(name = "numero_transportados")
     private Integer numeroTransportados;
     @Size(max = 3)
     @Column(name = "servidores")
     private String servidores;
-    @Column(name = "dataSaida")
+    @Column(name = "data_saida")
     @Temporal(TemporalType.DATE)
     private Date dataSaida;
-    @Column(name = "horaSaida")
+    @Column(name = "hora_saida")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaSaida;
     @Lob
     @Size(max = 65535)
-    @Column(name = "localSaida")
+    @Column(name = "local_saida")
     private String localSaida;
-    @Column(name = "dataRetorno")
+    @Column(name = "data_retorno")
     @Temporal(TemporalType.DATE)
     private Date dataRetorno;
-    @Column(name = "horaRetorno")
+    @Column(name = "hora_retorno")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaRetorno;
     @Lob
     @Size(max = 65535)
-    @Column(name = "localRetorno")
+    @Column(name = "local_retorno")
     private String localRetorno;
     @Lob
     @Size(max = 65535)
@@ -80,33 +80,33 @@ public class Solicitacaoviagem implements Serializable {
     private String percurso;
     @Lob
     @Size(max = 65535)
-    @Column(name = "objetivoViagem")
+    @Column(name = "objetivo_viagem")
     private String objetivoViagem;
-    @ManyToMany(mappedBy = "solicitacaoviagemList")
+    @ManyToMany(mappedBy = "solicitacaoViagemList")
     private List<Passageiro> passageiroList;
-    @JoinColumn(name = "responsavelAutorizante", referencedColumnName = "id")
+    @JoinColumn(name = "id_responsavel_autorizante", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
-    private Usuario responsavelAutorizante;
-    @JoinColumn(name = "responsavelSolicitacao", referencedColumnName = "id")
+    private Usuario idResponsavelAutorizante;
+    @JoinColumn(name = "id_responsavel_solicitacao", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
-    private Usuario responsavelSolicitacao;
-    @JoinColumn(name = "veiculo", referencedColumnName = "id")
+    private Usuario idResponsavelSolicitacao;
+    @JoinColumn(name = "id_veiculo", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Veiculo veiculo;
+    private Veiculo idVeiculo;
 
-    public Solicitacaoviagem() {
+    public SolicitacaoViagem() {
     }
 
-    public Solicitacaoviagem(Integer id) {
-        this.id = id;
+    public SolicitacaoViagem(Integer idSolicitacaoViagem) {
+        this.idSolicitacaoViagem = idSolicitacaoViagem;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdSolicitacaoViagem() {
+        return idSolicitacaoViagem;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdSolicitacaoViagem(Integer idSolicitacaoViagem) {
+        this.idSolicitacaoViagem = idSolicitacaoViagem;
     }
 
     public Integer getNumeroTransportados() {
@@ -198,45 +198,45 @@ public class Solicitacaoviagem implements Serializable {
         this.passageiroList = passageiroList;
     }
 
-    public Usuario getResponsavelAutorizante() {
-        return responsavelAutorizante;
+    public Usuario getIdResponsavelAutorizante() {
+        return idResponsavelAutorizante;
     }
 
-    public void setResponsavelAutorizante(Usuario responsavelAutorizante) {
-        this.responsavelAutorizante = responsavelAutorizante;
+    public void setIdResponsavelAutorizante(Usuario idResponsavelAutorizante) {
+        this.idResponsavelAutorizante = idResponsavelAutorizante;
     }
 
-    public Usuario getResponsavelSolicitacao() {
-        return responsavelSolicitacao;
+    public Usuario getIdResponsavelSolicitacao() {
+        return idResponsavelSolicitacao;
     }
 
-    public void setResponsavelSolicitacao(Usuario responsavelSolicitacao) {
-        this.responsavelSolicitacao = responsavelSolicitacao;
+    public void setIdResponsavelSolicitacao(Usuario idResponsavelSolicitacao) {
+        this.idResponsavelSolicitacao = idResponsavelSolicitacao;
     }
 
-    public Veiculo getVeiculo() {
-        return veiculo;
+    public Veiculo getIdVeiculo() {
+        return idVeiculo;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
+    public void setIdVeiculo(Veiculo idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idSolicitacaoViagem != null ? idSolicitacaoViagem.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Solicitacaoviagem)) {
+        if (!(object instanceof SolicitacaoViagem)) {
             return false;
         }
-        Solicitacaoviagem other = (Solicitacaoviagem) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        SolicitacaoViagem other = (SolicitacaoViagem) object;
+        if ((this.idSolicitacaoViagem == null && other.idSolicitacaoViagem != null) || (this.idSolicitacaoViagem != null && !this.idSolicitacaoViagem.equals(other.idSolicitacaoViagem))) {
             return false;
         }
         return true;
@@ -244,7 +244,7 @@ public class Solicitacaoviagem implements Serializable {
 
     @Override
     public String toString() {
-        return "com.model.entity.Solicitacaoviagem[ id=" + id + " ]";
+        return "com.model.entity.SolicitacaoViagem[ idSolicitacaoViagem=" + idSolicitacaoViagem + " ]";
     }
     
 }

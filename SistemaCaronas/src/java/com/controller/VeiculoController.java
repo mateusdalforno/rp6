@@ -33,7 +33,7 @@ public class VeiculoController {
     }
 
     public String salvar() {
-        veiculo.setTipoVeiculo(tipoVeiculoSelect);
+        veiculo.setIdTipoVeiculo(tipoVeiculoSelect);
         if (veiculo.getId() == null) {
             dao.inserir(veiculo);
         } else {
@@ -45,7 +45,7 @@ public class VeiculoController {
 
     public String editar() {
         this.veiculo = dao.buscar(id);
-        this.tipoVeiculoSelect = this.veiculo.getTipoVeiculo();
+        this.tipoVeiculoSelect = this.veiculo.getIdTipoVeiculo();
         return "formulario";
     }
 

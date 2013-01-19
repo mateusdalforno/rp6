@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.model.entity;
 
 import java.io.Serializable;
@@ -6,7 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,14 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Veiculo.findByCapacidadePassageiro", query = "SELECT v FROM Veiculo v WHERE v.capacidadePassageiro = :capacidadePassageiro"),
     @NamedQuery(name = "Veiculo.findByCor", query = "SELECT v FROM Veiculo v WHERE v.cor = :cor")})
 public class Veiculo implements Serializable {
-<<<<<<< HEAD
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "veiculo")
-    private List<SolicitacaoViagem> solicitacaoViagemList;
-=======
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo")
-    private List<Solicitacaoviagem> solicitacaoviagemList;
->>>>>>> b631951e9508beae9bced05ede8614a82490687b
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,9 +55,11 @@ public class Veiculo implements Serializable {
     @Size(max = 45)
     @Column(name = "cor")
     private String cor;
-    @JoinColumn(name = "tipo_veiculo", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    private TipoVeiculo tipoVeiculo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVeiculo")
+    private List<SolicitacaoViagem> solicitacaoViagemList;
+    @JoinColumn(name = "id_tipo_veiculo", referencedColumnName = "id_tipo_veiculo")
+    @ManyToOne(optional = false)
+    private TipoVeiculo idTipoVeiculo;
 
     public Veiculo() {
     }
@@ -111,12 +108,21 @@ public class Veiculo implements Serializable {
         this.cor = cor;
     }
 
-    public TipoVeiculo getTipoVeiculo() {
-        return tipoVeiculo;
+    @XmlTransient
+    public List<SolicitacaoViagem> getSolicitacaoViagemList() {
+        return solicitacaoViagemList;
     }
 
-    public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
-        this.tipoVeiculo = tipoVeiculo;
+    public void setSolicitacaoViagemList(List<SolicitacaoViagem> solicitacaoViagemList) {
+        this.solicitacaoViagemList = solicitacaoViagemList;
+    }
+
+    public TipoVeiculo getIdTipoVeiculo() {
+        return idTipoVeiculo;
+    }
+
+    public void setIdTipoVeiculo(TipoVeiculo idTipoVeiculo) {
+        this.idTipoVeiculo = idTipoVeiculo;
     }
 
     @Override
@@ -143,13 +149,5 @@ public class Veiculo implements Serializable {
     public String toString() {
         return "com.model.entity.Veiculo[ id=" + id + " ]";
     }
-
-    @XmlTransient
-    public List<Solicitacaoviagem> getSolicitacaoviagemList() {
-        return solicitacaoviagemList;
-    }
-
-    public void setSolicitacaoviagemList(List<Solicitacaoviagem> solicitacaoviagemList) {
-        this.solicitacaoviagemList = solicitacaoviagemList;
-    }
+    
 }

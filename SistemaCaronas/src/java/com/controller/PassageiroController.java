@@ -33,7 +33,7 @@ public class PassageiroController {
      FacesContext.getCurrentInstance().getExternalContext().getSession(true);
      }*/
     public String salvar() {
-        if (passageiro.getId() == null) {
+        if (passageiro.getIdPassageiro() == null) {
             dao.inserir(passageiro);
         } else {
             dao.atualizar(passageiro);

@@ -36,8 +36,8 @@ public class UsuarioController {
     }
 
     public String salvar() {
-        usuario.setTipoUsuarioId(tipoUsuarioSelect);
-        if (usuario.getId() == null) {
+        usuario.setIdTipoUsuario(tipoUsuarioSelect);
+        if (usuario.getIdTipoUsuario()== null) {
             dao.inserir(usuario);
         } else {
             dao.atualizar(usuario);
@@ -48,7 +48,7 @@ public class UsuarioController {
 
     public String editar() {
         this.usuario = dao.buscar(id);
-        this.tipoUsuarioSelect = this.usuario.getTipoUsuarioId();
+        this.tipoUsuarioSelect = this.usuario.getIdTipoUsuario();
         return "formulario";
     }
 

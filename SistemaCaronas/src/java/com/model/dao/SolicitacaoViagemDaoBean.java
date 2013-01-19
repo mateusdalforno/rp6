@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.model.dao;
 
-import com.model.entity.Solicitacaoviagem;
+import com.model.entity.SolicitacaoViagem;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,33 +12,33 @@ import javax.persistence.Query;
  * @author Usuario
  */
 @Stateless
-public class SolicitacaoviagemDaoBean implements SolicitacaoviagemDao {
+public class SolicitacaoViagemDaoBean implements SolicitacaoViagemDao {
     
     @PersistenceContext(unitName = "SistemaCaronasPU")
     private EntityManager em;
 
     @Override
-    public void inserir(Solicitacaoviagem solicitacaoviagem) {
+    public void inserir(SolicitacaoViagem solicitacaoviagem) {
         em.persist(solicitacaoviagem);
     }
 
     @Override
-    public void atualizar(Solicitacaoviagem solicitacaoviagem) {
+    public void atualizar(SolicitacaoViagem solicitacaoviagem) {
         em.merge(solicitacaoviagem);
     }
 
     @Override
-    public void remover(Solicitacaoviagem solicitacaoviagem) {
+    public void remover(SolicitacaoViagem solicitacaoviagem) {
         em.remove(em.merge(solicitacaoviagem));
     }
 
     @Override
-    public Solicitacaoviagem buscar(Integer id) {
-        return em.find(Solicitacaoviagem.class, id);
+    public SolicitacaoViagem buscar(Integer id) {
+        return em.find(SolicitacaoViagem.class, id);
     }
     
     @Override
-    public List<Solicitacaoviagem> listar() {
+    public List<SolicitacaoViagem> listar() {
         Query query = em.createNamedQuery("Solicitacaoviagem.findAll");
         return query.getResultList();
     }

@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.controller;
 
 import com.model.dao.PassageiroDaoBean;
-import com.model.dao.SolicitacaoviagemDao;
-import com.model.entity.Solicitacaoviagem;
+import com.model.dao.SolicitacaoViagemDao;
+import com.model.entity.SolicitacaoViagem;
 import com.pogs.PassageiroPOG;
 import com.pogs.SolicitPog;
 import java.util.List;
@@ -24,11 +20,11 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @RequestScoped
 public class SolicitacaoViagemController {
-    private Solicitacaoviagem solicitacaoviagem;
+    private SolicitacaoViagem solicitacaoviagem;
     
     @EJB
-    private SolicitacaoviagemDao dao;
-    private List<Solicitacaoviagem> solicitacoes;
+    private SolicitacaoViagemDao dao;
+    private List<SolicitacaoViagem> solicitacoes;
     
     @ManagedProperty(name = "id", value = "#{param.id}")
     private Integer id;
@@ -37,7 +33,7 @@ public class SolicitacaoViagemController {
     //private List<SelectItem> veiculos;
     
     public SolicitacaoViagemController() {
-        this.solicitacaoviagem = new Solicitacaoviagem();
+        this.solicitacaoviagem = new SolicitacaoViagem();
     }
     
     //@PostConstruct
@@ -57,7 +53,7 @@ public class SolicitacaoViagemController {
     }
     
     public String salvar(SolicitPog spog) {
-        if (getSolicitacaoviagem().getId() == null) {
+        if (getSolicitacaoviagem().getIdSolicitacaoViagem() == null) {
             for (PassageiroPOG pog: spog.getPassageiros()) {
                 if (pog.getId() == null) {
                     new PassageiroDaoBean().inserir(pog.getPassageiro());
@@ -91,42 +87,42 @@ public class SolicitacaoViagemController {
     /**
      * @return the solicitacaoviagem
      */
-    public Solicitacaoviagem getSolicitacaoviagem() {
+    public SolicitacaoViagem getSolicitacaoviagem() {
         return solicitacaoviagem;
     }
 
     /**
      * @param solicitacaoviagem the solicitacaoviagem to set
      */
-    public void setSolicitacaoviagem(Solicitacaoviagem solicitacaoviagem) {
+    public void setSolicitacaoviagem(SolicitacaoViagem solicitacaoviagem) {
         this.solicitacaoviagem = solicitacaoviagem;
     }
 
     /**
      * @return the dao
      */
-    public SolicitacaoviagemDao getDao() {
+    public SolicitacaoViagemDao getDao() {
         return dao;
     }
 
     /**
      * @param dao the dao to set
      */
-    public void setDao(SolicitacaoviagemDao dao) {
+    public void setDao(SolicitacaoViagemDao dao) {
         this.dao = dao;
     }
 
     /**
      * @return the solicitacoes
      */
-    public List<Solicitacaoviagem> getSolicitacoes() {
+    public List<SolicitacaoViagem> getSolicitacoes() {
         return solicitacoes;
     }
 
     /**
      * @param solicitacoes the solicitacoes to set
      */
-    public void setSolicitacoes(List<Solicitacaoviagem> solicitacoes) {
+    public void setSolicitacoes(List<SolicitacaoViagem> solicitacoes) {
         this.solicitacoes = solicitacoes;
     }
 

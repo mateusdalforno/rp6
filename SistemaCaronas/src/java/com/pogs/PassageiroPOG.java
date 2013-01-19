@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pogs;
 
 import com.model.entity.Passageiro;
@@ -38,11 +34,11 @@ public class PassageiroPOG {
     }
 
     public Integer getId() {
-        return getPassageiro().getId();
+        return getPassageiro().getIdPassageiro();
     }
 
     public void setId(Integer id) {
-        getPassageiro().setId(id);
+        getPassageiro().setIdPassageiro(id);
     }
 
     public String getNome() {
