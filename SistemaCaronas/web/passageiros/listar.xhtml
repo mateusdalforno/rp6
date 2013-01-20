@@ -12,7 +12,7 @@
             <h:dataTable id="passageiros" rendered="#{! empty passageiroController.passageiros}" var="passageiro" value="#{passageiroController.passageiros}" >
                 <h:column>
                     <f:facet name="header" ><h:outputText value="Id" /></f:facet>
-                    <h:outputText value="#{passageiro.id}" />
+                    <h:outputText value="#{passageiro.idPassageiro}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header" ><h:outputText value="Nome" /></f:facet>
@@ -29,10 +29,10 @@
                 <h:column>
                     <f:facet name="header" ><h:outputText value="Comandos" /></f:facet>
                     <h:commandButton value="Editar" action="#{passageiroController.editar()}">
-                        <f:param name="id" value="#{passageiro.id}" />
+                        <f:param name="id" value="#{passageiro.idPassageiro}" />
                     </h:commandButton>
                     <h:commandButton value="Deletar" action="#{passageiroController.deletar()}">
-                        <f:param name="id" value="#{passageiro.id}" />
+                        <f:param name="id" value="#{passageiro.idPassageiro}" />
                     </h:commandButton>
                 </h:column>
             </h:dataTable>

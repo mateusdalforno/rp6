@@ -1,8 +1,11 @@
 package com.controller;
 
+import com.model.dao.PassageiroDao;
 import com.model.dao.PassageiroDaoBean;
 import com.model.dao.SolicitacaoViagemDao;
 import com.model.entity.SolicitacaoViagem;
+import com.model.entity.Usuario;
+import com.model.entity.Veiculo;
 import com.pogs.PassageiroPOG;
 import com.pogs.SolicitPog;
 import java.util.List;
@@ -20,43 +23,48 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @RequestScoped
 public class SolicitacaoViagemController {
+
     private SolicitacaoViagem solicitacaoviagem;
-    
     @EJB
     private SolicitacaoViagemDao dao;
     private List<SolicitacaoViagem> solicitacoes;
-    
     @ManagedProperty(name = "id", value = "#{param.id}")
     private Integer id;
-    
     private PassageiroPOG[] passageiros;
     //private List<SelectItem> veiculos;
-    
+    private Veiculo veiculoSelect;
+    private Usuario solicitanteSelect;
+    private Usuario autorizadorSelect;
+    @EJB
+    private PassageiroDao passDao;
+
     public SolicitacaoViagemController() {
         this.solicitacaoviagem = new SolicitacaoViagem();
     }
-    
+
     //@PostConstruct
     //public void init() {
-      //  this.passageiros = new PassageiroPOG[] {new PassageiroPOG()};
+    //  this.passageiros = new PassageiroPOG[] {new PassageiroPOG()};
         /*VeiculoController vc = new VeiculoController();
-        vc.listar();
-        List<Veiculo> todosveiculos = vc.getVeiculos();
-        for (Veiculo veiculo: todosveiculos) {
-            this.getVeiculos().add(new SelectItem(veiculo, veiculo.getTipoVeiculo().getTipoVeiculo()));
-        }*/
+     vc.listar();
+     List<Veiculo> todosveiculos = vc.getVeiculos();
+     for (Veiculo veiculo: todosveiculos) {
+     this.getVeiculos().add(new SelectItem(veiculo, veiculo.getTipoVeiculo().getTipoVeiculo()));
+     }*/
     //}
-    
     @PostConstruct
     void initialiseSession() {
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
     }
-    
+
     public String salvar(SolicitPog spog) {
+        solicitacaoviagem.setIdVeiculo(veiculoSelect);
+        solicitacaoviagem.setIdResponsavelSolicitacao(solicitanteSelect);
+        solicitacaoviagem.setIdResponsavelAutorizante(autorizadorSelect);
         if (getSolicitacaoviagem().getIdSolicitacaoViagem() == null) {
-            for (PassageiroPOG pog: spog.getPassageiros()) {
+            for (PassageiroPOG pog : spog.getPassageiros()) {
                 if (pog.getId() == null) {
-                    new PassageiroDaoBean().inserir(pog.getPassageiro());
+                    this.passDao.inserir(pog.getPassageiro());
                 }
             }
             this.setNumero(spog.getNumero());
@@ -66,19 +74,22 @@ public class SolicitacaoViagemController {
         }
         return "index";
     }
-    
+
     public String editar() {
         this.setSolicitacaoviagem(getDao().buscar(getId()));
+        this.veiculoSelect = this.solicitacaoviagem.getIdVeiculo();
+        this.solicitanteSelect = this.solicitacaoviagem.getIdResponsavelSolicitacao();
+        this.autorizadorSelect = this.solicitacaoviagem.getIdResponsavelAutorizante();
         return "formulario";
     }
-    
+
     public String deletar() {
         this.setSolicitacaoviagem(getDao().buscar(getId()));
         this.getDao().remover(getSolicitacaoviagem());
         this.setSolicitacoes(getDao().listar());
         return "listar";
     }
-    
+
     @PostConstruct
     public void listar() {
         this.setSolicitacoes(getDao().listar());
@@ -139,28 +150,26 @@ public class SolicitacaoViagemController {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public void setSaoServidores(boolean saoServidores) {
         if (saoServidores) {
             this.solicitacaoviagem.setServidores("Sim");
-        }
-        
-        else {
+        } else {
             this.solicitacaoviagem.setServidores("Nao");
         }
     }
-    
+
     public boolean getSaoServidores() {
         if (this.solicitacaoviagem.getServidores() == null) {
             return false;
         }
         return this.solicitacaoviagem.getServidores().equals("Sim");
     }
-    
+
     public void setNumero(Integer numero) {
         this.solicitacaoviagem.setNumeroTransportados(numero);
     }
-    
+
     public Integer getNumero() {
         return this.solicitacaoviagem.getNumeroTransportados();
     }
@@ -171,16 +180,36 @@ public class SolicitacaoViagemController {
     public PassageiroPOG[] getPassageiros() {
         return passageiros;
     }
-    
+
+    public Veiculo getVeiculoSelect() {
+        return veiculoSelect;
+    }
+
+    public void setVeiculoSelect(Veiculo veiculoSelect) {
+        this.veiculoSelect = veiculoSelect;
+    }
+
+    public Usuario getSolicitanteSelect() {
+        return solicitanteSelect;
+    }
+
+    public void setSolicitanteSelect(Usuario solicitanteSelect) {
+        this.solicitanteSelect = solicitanteSelect;
+    }
+
+    public Usuario getAutorizadorSelect() {
+        return autorizadorSelect;
+    }
+
+    public void setAutorizadorSelect(Usuario autorizadorSelect) {
+        this.autorizadorSelect = autorizadorSelect;
+    }
 
     /**
      * @return the veiculos
      */
     //public List<SelectItem> getVeiculos() {
-      //  return veiculos;
+    //  return veiculos;
     //}
-
-    
-    
     
 }
